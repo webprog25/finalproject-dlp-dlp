@@ -1,0 +1,85 @@
+#Menü{
+    background-color: black;
+    display: flex;
+    color: white;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+    padding: 1rem;
+    box-sizing: border-box;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    gap: 1rem;
+}
+
+.TaskBar{
+    background-color: rgb(69, 67, 67);
+    display: flex;
+    color: white;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+    padding: 1rem;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem 1.5rem;
+    gap: 1rem;
+}
+
+h1{
+    margin: 0px;
+    padding-right: 5rem;
+}
+
+label{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+select{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-right: 1rem;
+    border-radius: 0.25rem;
+}
+
+.taskInput{
+    margin-right: 0 auto 1rem;
+    border-radius: 0.25rem;
+    width: 4.5rem;
+}
+
+button{
+    background-color: aquamarine;
+    border-radius: 0.25rem;
+}
+
+.mainboard{
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+#boardWochenplan{
+    flex: 1;
+    background-color: aquamarine;
+    padding: 0.5rem;
+    border-radius: 1.5rem 0.5rem;
+}
+
+.sideboard{
+    display: flex;
+    flex-direction: column;
+    flex: 0.5;
+    gap: 1rem;
+}
+
+#boardTermine, #boardTodo{
+    background-color: aqua;
+    padding: 0.5rem;
+    border-radius: 1.5rem 0.5rem;
+}
+
+.TaskBar.hidden{
+    display: none;
+}

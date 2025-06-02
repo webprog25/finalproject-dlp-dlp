@@ -6,8 +6,118 @@
 
     <!-- This line provides automatic page and style reloading when files change -->
     <script type="module" src="/lib/client/updater.js"></script>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>Hello, world!</h1>
+     <header>
+        <section id="Menü">
+            <form id="menüFormular">
+              <h1>Menü</h1>
+              <label for="Kategorie">Wähle eine Kategorie:</label>
+              <select id="Kategorie">
+                  <option value="" selected disabled id="defaultOption">Bitte wählen</option>
+                  <option value="Wochenplan">Wochenplan</option>
+                  <option value="Termin">Termin</option>
+                  <option value="Todo">To Do</option>
+              </select>
+              <input id="Name" placeholder="Dein Name"></input>
+              <button type="submit" id="buttonMenü">create</button>
+            </form>
+        </section >
+       
+        <section class="TaskBar hidden" id="Wochenplan">
+            <form id="wochenplanFormular">
+                <h1>Wochenplan</h1>
+                <label for="Datum">Datum:</label>
+                <input type="date"></input>
+                
+                <label for="UhrzeitBeginn">Beginn:</label>
+                <input class="taskInput" type="time" id="UhrzeitBeginn"></input>
+
+                <label for="UhrzeitEnde">Ende:</label>
+                <input class="taskInput" type="time" id="UhrzeitEnde"></input>
+                
+                <label for="Inhalt">Inhalt:</label>
+                <input class="taskInput" id="Inhalt" placeholder="Inhalt"></input>
+                
+                <label for="Farbe">Farbe:</label>
+                <select id="farbe">
+                    <option value="" selected disabled id="defaultOption">Bitte wählen</option>
+                    <option value="eins">Rot</option>
+                    <option value="zwei">Gelb</option>
+                    <option value="drei">Grün</option>
+                    <option value="vier">Blau</option>
+                </select>
+                <button>confirm</button>
+            </form>
+        </section>
+
+        <section class="TaskBar hidden" id="Termin">
+            <form id="terminFormular">
+                <h1>Termin</h1>
+                <label for="Datum">Datum:</label>
+                <input type="date" id="terminDatum"></input>     
+                
+                <label for="Uhrzeit">Uhrzeit:</label>
+                <input class="taskInput" type="time" id="terminUhrzeit"></input>
+                
+                <label for="Inhalt">Inhalt:</label>
+                <input class="taskInput" id="terminInhalt" placeholder="Inhalt"></input>
+                
+                <label for="Farbe">Farbe:</label>   
+                <select id="terminFarbe">
+                    <option value="" selected disabled id="defaultOption">Bitte wählen</option>
+                    <option value="Rot">Rot</option>
+                    <option value="Gelb">Gelb</option>
+                    <option value="Grün">Grün</option>
+                    <option value="Blau">Blau</option>
+                </select>
+                <button type="submit">Speichern</button>
+            </form>
+        </section>
+
+        <section class="TaskBar hidden" id="Todo">
+            <form id="todoFormular">
+                <h1>To Do</h1>
+                <label for="Datum">Datum:</label>
+                <input type="date" id="todoDatum"></input>
+                
+                <label for="todoFeld">Inhalt:</label>
+                <input class="taskInput" id="todoInhalt" placeholder="Inhalt"></input>
+                
+                <label for="Farbe">Farbe:</label>
+                <select id="todoFarbe">
+                    <option value="" selected disabled id="defaultOption">Bitte wählen</option>
+                    <option value="Rot">Rot</option>
+                    <option value="Gelb">Gelb</option>
+                    <option value="Grün">Grün</option>
+                    <option value="Blau">Blau</option>
+                </select>
+                <button type="submit">Speichern</button>
+            </form>
+        </section>
+    </header>
+
+    <main>
+        <div class="mainboard">
+            <section id="boardWochenplan">
+                <h2>Wochenplan</h2>
+            </section>
+            <div class="sideboard">
+                
+                <section id="boardTermine">
+                    <h2>Termine</h2>
+                    <ul id="terminListe"></ul>
+                </section>
+                
+                <section id="boardTodo">
+                    <h2>To Do</h2>
+                    <ul id="todoListe"></ul>
+                </section>
+
+            </div>
+        </div>
+    </main>
+<script src="index.js"></script>
   </body>
 </html>
