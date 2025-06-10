@@ -1,3 +1,49 @@
+const Name = document.querySelector("#Name");
+
+document.addEventListener('DOMContentLoaded', function () {
+  let calendarEl = document.getElementById('calendar');
+
+  let calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'timeGridWeek',
+    locale: 'de',
+    allDaySlot: false,
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    }
+});
+
+  calendar.render();
+
+  
+  document.getElementById('wochenplanFormular').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const wochenplanName = Name.value;
+    const wochenplanDatum = document.getElementById('Datum').value;
+    const wpUhrzeitbeginn = document.getElementById('UhrzeitBeginn').value;
+    const wpUhrzeitende = document.getElementById('UhrzeitEnde').value;
+    const wochenplanInhalt = document.getElementById('Inhalt').value;
+    const wochenplanFarbe = document.getElementById('farbe').value;
+
+    // Unterstützung chatGPT: Start- und Endzeit erstellen
+    const startDate = new Date(wochenplanDatum + 'T' + wpUhrzeitbeginn);
+    const endDate = new Date(wochenplanDatum + 'T' + wpUhrzeitende);
+
+    // Unterstützung chatGPT: Event im Kalender hinzufügen und konfigurieren
+    calendar.addEvent({
+      name: wochenplanName,
+      title: `${Name.value}: ${wochenplanInhalt}`,
+      start: startDate,
+      end: endDate,
+      backgroundColor: wochenplanFarbe
+    });
+
+    document.getElementById('wochenplanFormular').reset();
+  });
+});
+
 const Kategorie = document.getElementById("Kategorie");
 const menüFormular = document.getElementById("menüFormular");
 const Wochenplan = document.getElementById("Wochenplan");
@@ -29,9 +75,7 @@ menüFormular.addEventListener("submit", (event) => {
         default:
             break;
     }
-})
-
-const Name = document.querySelector("#Name");
+});
 
 const todoFormular = document.querySelector("#todoFormular");
 const todoListe = document.getElementById("todoListe");
@@ -78,7 +122,7 @@ todoFormular.addEventListener("submit", (event) => {
     todoInhalt.value = "";
     todoDatum.value = "";
     todoFarbe.selectedIndex = 0;
-})
+});
 
 const terminFormular = document.querySelector("#terminFormular");
 const terminListe = document.getElementById("terminListe");
@@ -125,5 +169,4 @@ terminFormular.addEventListener("submit", (event) => {
     terminDatum.value = "";
     terminUhrzeit.value = "";
     terminFarbe.selectedIndex = 0;
-})
-
+});

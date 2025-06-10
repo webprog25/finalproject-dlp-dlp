@@ -83,3 +83,18 @@ button{
 .TaskBar.hidden{
     display: none;
 }
+
+#calendar {
+  margin: 0 auto;
+  height: 600px;
+  border: 1px solid #ccc;
+  background-color: beige;
+}
+
+.fc-timegrid-col {
+  width: 160px;
+}
+
+.fc-col-header-cell{
+  width: 160px;
+}

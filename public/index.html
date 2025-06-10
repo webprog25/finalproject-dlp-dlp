@@ -7,7 +7,20 @@
     <!-- This line provides automatic page and style reloading when files change -->
     <script type="module" src="/lib/client/updater.js"></script>
     <link rel="stylesheet" href="styles.css">
+    
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+    </script>
   </head>
+
   <body>
      <header>
         <section id="Menü">
@@ -20,8 +33,8 @@
                   <option value="Termin">Termin</option>
                   <option value="Todo">To Do</option>
               </select>
-              <input id="Name" placeholder="Dein Name"></input>
-              <button type="submit" id="buttonMenü">create</button>
+              <input id="Name" placeholder="Dein Name" required></input>
+              <button type="submit" id="buttonMenü">erstellen</button>
             </form>
         </section >
        
@@ -29,7 +42,7 @@
             <form id="wochenplanFormular">
                 <h1>Wochenplan</h1>
                 <label for="Datum">Datum:</label>
-                <input type="date"></input>
+                <input type="date" id="Datum"></input>
                 
                 <label for="UhrzeitBeginn">Beginn:</label>
                 <input class="taskInput" type="time" id="UhrzeitBeginn"></input>
@@ -43,12 +56,12 @@
                 <label for="Farbe">Farbe:</label>
                 <select id="farbe">
                     <option value="" selected disabled id="defaultOption">Bitte wählen</option>
-                    <option value="eins">Rot</option>
-                    <option value="zwei">Gelb</option>
-                    <option value="drei">Grün</option>
-                    <option value="vier">Blau</option>
+                    <option value="Rot">Rot</option>
+                    <option value="Gelb">Gelb</option>
+                    <option value="Grün">Grün</option>
+                    <option value="Blau">Blau</option>
                 </select>
-                <button>confirm</button>
+                <button type="submit">Speichern</button>
             </form>
         </section>
 
@@ -102,6 +115,7 @@
         <div class="mainboard">
             <section id="boardWochenplan">
                 <h2>Wochenplan</h2>
+                <div id="calendar"></div>
             </section>
             <div class="sideboard">
                 
@@ -118,6 +132,6 @@
             </div>
         </div>
     </main>
-<script src="index.js"></script>
+<script src="index.js" defer></script>
   </body>
 </html>
