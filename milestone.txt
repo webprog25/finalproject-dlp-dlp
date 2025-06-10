@@ -1,12 +1,20 @@
 Final Project Milestone
 ==============================
 
-Project Title: <TODO>
-Your Name: <TODO>
+Project Title: Wochen- und Terminplaner mit Todo-Liste
+Your Name: Duy Le Pham
 
 Overview
 --------
 <TODO: Let me know how things are going. What have you explored, looked into, worked on, and tried so far? What do you have left to do? Are you running into any particular difficulties or blockers?>
+Ich konnte die Seite nach meinen Vorstellungen aufbauen und zumindest die Grundfunktionen schon programmieren,
+z.B. Aufklappen der Taskbar, sobald eine Kategorie ausgewählt wird, Eingabefelder für Datum und Uhrzeit, Zuordnung des Eingabeblocks
+zum jeweiligen Board.
+Auch das Einbetten des FullCalendar hat funktioniert. Allerdings habe ich mit den Kalendereintragungen noch Schwierigkeiten: 
+Die Farbauswahl, Datum und Uhrzeit-Eingaben. 
+Noch zu erledigen: 
+- CSS: Optisch bin ich noch nicht zufrieden und ich werde deshalb noch einige Anpassungen vornehmen.
+- Funktionen: Delete-Button, Edit-Button, Move-Button einbauen, eventuell Drag-and-Drop-Funktionen hinzufügen
 
 Project Changes
 ---------------
@@ -19,10 +27,17 @@ Implementation Details
 External libraries and code
 ---------------------------
 <TODO: Identify any external libraries or code you are using or plan to use, and describe how it fits into your project. Please include everything even if you already listed it in your proposal.>
+Kalenderanzeige (FullCalendar): Das Einbetten hat funktionieren. Allerdings will noch einige Konfigurationen vornehmen 
+sowie die Darstellung noch optisch nachbessern.
+Aufgaben Drag & Drop (Sortable.js): Sofern es mir gelingt, will ich auch eine Drag-and-Drop-Funktion einbauen.
+
 
 Collaboration and resources
 ---------------------------
 <TODO: Identify any sources you have consulted or plan to consult, except for code listed above. Include those you listed previously in your proposal.>
+W3 schools: https://www.w3schools.com/
+Youtube-Tutorials: https://www.youtube.com/watch?v=lfmg-EJ8gm4&t=17951s, https://www.youtube.com/watch?v=HGTJBPNC-Gw&t=1301s
+MDN: https://developer.mozilla.org/en-US/ 
 
 Anything else?
 --------------
