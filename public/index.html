@@ -9,16 +9,7 @@
     <link rel="stylesheet" href="styles.css">
     
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-    </script>
+   
   </head>
 
   <body>
@@ -39,22 +30,22 @@
         </section >
        
         <section class="TaskBar hidden" id="Wochenplan">
-            <form id="wochenplanFormular">
+            <form id="wochenFormular">
                 <h1>Wochenplan</h1>
                 <label for="Datum">Datum:</label>
-                <input type="date" id="Datum"></input>
+                <input type="date" id="wochenDatum"></input>
                 
-                <label for="UhrzeitBeginn">Beginn:</label>
-                <input class="taskInput" type="time" id="UhrzeitBeginn"></input>
+                <label for="wochenUhrzeitbeginn">Beginn:</label>
+                <input class="taskInput" type="time" id="wochenUhrzeitbeginn"></input>
 
-                <label for="UhrzeitEnde">Ende:</label>
-                <input class="taskInput" type="time" id="UhrzeitEnde"></input>
+                <label for="wochenUhrzeitende">Ende:</label>
+                <input class="taskInput" type="time" id="wochenUhrzeitende"></input>
                 
-                <label for="Inhalt">Inhalt:</label>
-                <input class="taskInput" id="Inhalt" placeholder="Inhalt"></input>
+                <label for="wochenInhalt">Inhalt:</label>
+                <input class="taskInput" id="wochenInhalt" placeholder="Inhalt"></input>
                 
-                <label for="Farbe">Farbe:</label>
-                <select id="farbe">
+                <label for="wochenFarbe">Farbe:</label>
+                <select id="wochenFarbe">
                     <option value="" selected disabled id="defaultOption">Bitte wählen</option>
                     <option value="Rot">Rot</option>
                     <option value="Gelb">Gelb</option>
@@ -114,19 +105,25 @@
     <main>
         <div class="mainboard">
             <section id="boardWochenplan">
-                <h2>Wochenplan</h2>
-                <div id="calendar"></div>
+                <div id="wochenplanHeader" class="boardHeaders">
+                    <h2>Wochenplan</h2>
+                </div>
+                <div id="wochenKalender"></div>
             </section>
             <div class="sideboard">
                 
                 <section id="boardTermine">
-                    <h2>Termine</h2>
+                    <div id="terminHeader" class="boardHeaders">
+                        <h2>Termine</h2>
+                    </div>
                     <ul id="terminListe"></ul>
                 </section>
                 
                 <section id="boardTodo">
-                    <h2>To Do</h2>
-                    <ul id="todoListe"></ul>
+                    <div id="todoHeader" class="boardHeaders">
+                        <h2>To Do</h2>
+                    </div>   
+                        <ul id="todoListe"></ul>
                 </section>
 
             </div>

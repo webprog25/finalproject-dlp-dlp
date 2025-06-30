@@ -1,47 +1,70 @@
 const Name = document.querySelector("#Name");
+let Wochenkalender;
 
 document.addEventListener('DOMContentLoaded', function () {
-  let calendarEl = document.getElementById('calendar');
+  const calendar = document.getElementById('wochenKalender');
 
-  let calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'timeGridWeek',
-    locale: 'de',
-    allDaySlot: false,
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    }
+  Wochenkalender = new FullCalendar.Calendar(calendar, { 
+        initialView: 'timeGridWeek',
+        locale: 'de',
+        firstDay: 1,
+        allDaySlot: false,
+        expandRows: true,
+        headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: []
+  });
+  Wochenkalender.render();
 });
 
-  calendar.render();
+const wochenName = Name.value;
+const wochenFormular = document.querySelector("#wochenFormular");
+const wochenCalendar = document.getElementById("wochenKalender");
+const wochenInhalt = document.getElementById("wochenInhalt");
+const wochenDatum = document.getElementById("wochenDatum");
+const wochenUhrzeitbeginn = document.getElementById("wochenUhrzeitbeginn");
+const wochenUhrzeitende = document.getElementById("wochenUhrzeitende");
+const wochenFarbe = document.getElementById("wochenFarbe");
 
-  
-  document.getElementById('wochenplanFormular').addEventListener('submit', function(event) {
+wochenFormular.addEventListener("submit", (event) => {
     event.preventDefault();
+    
+    const wochenTerminbeginn = new Date(wochenDatum.value + 'T' + wochenUhrzeitbeginn.value);
+    const wochenTerminende = new Date(wochenDatum.value + 'T' + wochenUhrzeitende.value);
+    
+    let wochenBackground;
+    switch(wochenFarbe.value) {
+        case "Rot":
+                wochenBackground = "#F4A6A6";
+            break;
 
-    const wochenplanName = Name.value;
-    const wochenplanDatum = document.getElementById('Datum').value;
-    const wpUhrzeitbeginn = document.getElementById('UhrzeitBeginn').value;
-    const wpUhrzeitende = document.getElementById('UhrzeitEnde').value;
-    const wochenplanInhalt = document.getElementById('Inhalt').value;
-    const wochenplanFarbe = document.getElementById('farbe').value;
+        case "Gelb":
+                wochenBackground = "#FFFACD";
+            break;
 
-    // Unterstützung chatGPT: Start- und Endzeit erstellen
-    const startDate = new Date(wochenplanDatum + 'T' + wpUhrzeitbeginn);
-    const endDate = new Date(wochenplanDatum + 'T' + wpUhrzeitende);
+        case "Grün":
+                wochenBackground = "#BFD8B8";
+            break;
 
-    // Unterstützung chatGPT: Event im Kalender hinzufügen und konfigurieren
-    calendar.addEvent({
-      name: wochenplanName,
-      title: `${Name.value}: ${wochenplanInhalt}`,
-      start: startDate,
-      end: endDate,
-      backgroundColor: wochenplanFarbe
+        case "Blau":
+                wochenBackground = "#AEC6CF";
+            break;
+
+        default: 
+            break;
+    }
+
+    Wochenkalender.addEvent({
+      title: `${Name.value}: ${wochenInhalt.value}`,
+      start: wochenTerminbeginn,
+      end: wochenTerminende,
+      backgroundColor: wochenBackground,
+      textColor: '#000000',
     });
 
-    document.getElementById('wochenplanFormular').reset();
-  });
 });
 
 const Kategorie = document.getElementById("Kategorie");
@@ -90,10 +113,14 @@ todoFormular.addEventListener("submit", (event) => {
     const datumFormatierung = datumObjekt.toLocaleDateString("de-DE");
 
     const listeTodoitems = document.createElement("li");
-    listeTodoitems.className = "todoItems";
+    listeTodoitems.className = "todoEintrag";
+    listeTodoitems.dataset.name = Name.value; // Tipp von chatGPT: Name speichern. Dadurch wird nicht der Name des letzten Eintrages übernommen, wenn ich einen Eintrag nachträglich editiere.
     listeTodoitems.innerHTML = `
+            <span class="todoItems">
             ${Name.value}: ${datumFormatierung} - ${todoInhalt.value}
-            <input type="checkbox" id="checkbox"></input>
+            </span>
+            <button class="checkButton"><img src="check_button.svg"></button>
+            <button class="deleteButton"><img src="delete_button.svg"></button> 
         `;
     
     switch(todoFarbe.value) {
@@ -138,10 +165,13 @@ terminFormular.addEventListener("submit", (event) => {
     const datumFormatierung = datumObjekt.toLocaleDateString("de-DE");
     
     const listeTerminitems = document.createElement("li");
-    listeTerminitems.className = "terminItems";
+    listeTerminitems.className = "terminEintrag ";
     listeTerminitems.innerHTML = `
-            ${Name.value}: ${datumFormatierung}, ${terminUhrzeit.value} - ${terminInhalt.value}
-            <input type="checkbox" id="checkbox"></input>
+            <span class="terminItems">      
+                ${Name.value}: ${datumFormatierung}, ${terminUhrzeit.value} - ${terminInhalt.value}
+            </span>
+            <button class="checkButton"><img src="check_button.svg"></button>
+            <button class="deleteButton"><img src="delete_button.svg"></button>  
         `;
 
     switch(terminFarbe.value) {
@@ -169,4 +199,150 @@ terminFormular.addEventListener("submit", (event) => {
     terminDatum.value = "";
     terminUhrzeit.value = "";
     terminFarbe.selectedIndex = 0;
+});
+
+//Editieren
+terminListe.addEventListener("dblclick", (event) => {
+    const eintrag = event.target.closest("li.terminEintrag");
+    if (!eintrag) return;
+
+    const textSpan = eintrag.querySelector(".terminItems");
+
+    // Hilfstellungen von chatGPT: 
+    // verhindert Doppelklick im Input-Feld
+    if (event.target.tagName.toLowerCase() === "input") return;
+
+    // prüft, ob schon ein Input-Feld da ist
+    if (textSpan.querySelector("input")) return;
+    const fullText = textSpan.textContent.trim();
+
+    // teilt den Text anhand des ersten Doppelpunkts auf
+    const trennIndex = fullText.indexOf(":");
+    if (trennIndex === -1) return;
+
+    const name = fullText.slice(0, trennIndex).trim();
+    const inhalt = fullText.slice(trennIndex + 1).trim();
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = inhalt;
+    input.classList.add("terminEditInput");
+
+    textSpan.innerHTML = "";
+    textSpan.appendChild(input);
+    input.focus();
+
+    let gespeichert = false;
+
+    function speichern() {
+        if (gespeichert) return;
+        gespeichert = true;
+
+        const neuerInhalt = input.value.trim();
+        textSpan.textContent = `${name}: ${neuerInhalt}`;
+    }
+
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") speichern();
+    });
+
+    input.addEventListener("blur", speichern);
+});
+
+//Check
+terminListe.addEventListener("click", (event) => { 
+    const checkButton = event.target.closest(".checkButton");
+    if (!checkButton) return;
+
+    const terminEintrag = checkButton.closest(".terminEintrag");
+    const checkText = terminEintrag.querySelector(".terminItems");
+
+    checkText.classList.toggle("checkText");
+});
+
+//Editieren
+terminListe.addEventListener("click", (event) => {
+    const deleteButton = event.target.closest(".deleteButton");
+    if (!deleteButton) return;
+
+    const terminEintrag = deleteButton.closest(".terminEintrag");
+    if (terminEintrag) {
+        terminEintrag.remove();
+    }
+});
+
+const todoListeEdit = document.getElementById("todoListe");
+const NameEdit = document.querySelector("#Name");
+
+todoListeEdit.style.cursor = "pointer";
+
+
+//Editieren
+todoListe.addEventListener("dblclick", (event) => {
+    const eintrag = event.target.closest("li.todoEintrag");
+    if (!eintrag) return;
+
+    const textSpan = eintrag.querySelector(".todoItems");
+
+    // Hilfstellungen von chatGPT: 
+    // verhindert Doppelklick im Input-Feld
+    if (event.target.tagName.toLowerCase() === "input") return;
+
+    // prüft, ob schon ein Input-Feld da ist
+    if (textSpan.querySelector("input")) return;
+    const fullText = textSpan.textContent.trim();
+
+    // teilt den Text anhand des ersten Doppelpunkts auf
+    const trennIndex = fullText.indexOf(":");
+    if (trennIndex === -1) return;
+
+    const name = fullText.slice(0, trennIndex).trim();
+    const inhalt = fullText.slice(trennIndex + 1).trim();
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = inhalt;
+    input.classList.add("todoEditInput");
+
+    textSpan.innerHTML = "";
+    textSpan.appendChild(input);
+    input.focus();
+
+    let gespeichert = false;
+
+    function speichern() {
+        if (gespeichert) return;
+        gespeichert = true;
+
+        const neuerInhalt = input.value.trim();
+        textSpan.textContent = `${name}: ${neuerInhalt}`;
+    }
+
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") speichern();
+    });
+
+    input.addEventListener("blur", speichern);
+});
+
+//Check
+todoListe.addEventListener("click", (event) => { 
+    const checkButton = event.target.closest(".checkButton");
+    if (!checkButton) return;
+
+    const todoEintrag = checkButton.closest(".todoEintrag");
+    const checkText = todoEintrag.querySelector(".todoItems");
+
+    checkText.classList.toggle("checkText");
+});
+
+//Löschen
+todoListe.addEventListener("click", (event) => {
+    const deleteButton = event.target.closest(".deleteButton");
+    if (!deleteButton) return;
+
+    const todoEintrag = deleteButton.closest(".todoEintrag");
+    if (todoEintrag) {
+        todoEintrag.remove();
+    }
 });

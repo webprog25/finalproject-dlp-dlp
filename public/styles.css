@@ -63,7 +63,7 @@ button{
 #boardWochenplan{
     flex: 1;
     background-color: aquamarine;
-    padding: 0.5rem;
+    padding: 20px;
     border-radius: 1.5rem 0.5rem;
 }
 
@@ -84,17 +84,77 @@ button{
     display: none;
 }
 
-#calendar {
-  margin: 0 auto;
+#wochenKalender {
   height: 600px;
-  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
   background-color: beige;
 }
 
-.fc-timegrid-col {
-  width: 160px;
+.boardHeaders {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.fc-col-header-cell{
-  width: 160px;
+.checkButton{
+    background-color: rgb(199, 195, 195);
+    display: flex;
+    height: 30px;
+    width: 30px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.todoEintrag{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.deleteButton{
+    background-color: rgb(199, 195, 195);
+    display: flex;
+    height: 30px;
+    width: 30px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.terminEintrag{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.todoEditInput {
+  font-size: 1em;
+  padding: 2px 4px;
+  width: 90%;
+  box-sizing: border-box;
+}
+
+#todoListe li.todoEintrag:hover {
+  cursor: pointer;
+}
+
+.checkText{
+  text-decoration: line-through;
+}
+
+.terminEditInput {
+  font-size: 1em;
+  padding: 2px 4px;
+  width: 90%;
+  box-sizing: border-box;
+}
+
+#terminListe li.terminEintrag:hover {
+  cursor: pointer;
 }
