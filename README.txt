@@ -2,18 +2,26 @@
 Final Project
 ====================
 
-Project Title: <TODO>
-Your Name: <TODO>
+Project Title: Wochenarbeits- und Schulplaner für die Familie
+Your Name: Duy Le Pham
 
 Overview
 --------
-<TODO: A short description of your project and what it does.>
+Es ist ein Planer, in dem man Einträge für den jeweiligen Tage eintragen kann. 
+Im Wochenplaner stehen die Arbeitszeiten sowie die Schul- und Kindergartenzeiten, die wöchentlich variieren 
+können. Zudem gibt es eine ToDo-Liste, die wichtige Erledigungen oder Arbeiten mit Fristen
+erfassen soll. Die Terminliste listet außerdem einzelne Termine auf. 
+Jede Person kann über ein Eingabeformular Beiträge eintragen, die dann entweder im Planer 
+oder in den Listen gespeichert werden. Die Beiträge können im Nachhinein auch geändert oder 
+gelöscht werden. Die Einträge in der Todo- und Terminliste können abgehakt werden, sobald sie erledigt sind
+und können dann aus der Liste gelöscht werden.
 
 Running
 -------
 <TODO: In general, I should be able to `npm install` and `npm start` your project. If there is anything else we need to know about running your project, please let us know here.>
 
-Do I need to load data from init_db.mongodb? <TODO: Yes/No>
+Do I need to load data from init_db.mongodb? <TODO: Yes/No> No
+Derweil bin ich noch nicht soweit, dass ich mein Projekt auf der Meise zum Laufen bringe. Sofern es in Ordnung geht, werde ich nächstes Wochenende mich damit befassen. 
 
 Features
 --------
@@ -22,4 +30,10 @@ Features
 Collaboration and libraries
 ---------------------------
 <TODO: Identify any sources you have consulted or libraries/external code you used. If your project overlaps with another project or coursework for another class, please describe the overlap and the parts specific to you/lecture here.>
+
+Kalenderansicht von fullcalendar
+Buttons von svgrepo.com
+
+
+
 
