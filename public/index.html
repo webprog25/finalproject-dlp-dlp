@@ -7,9 +7,9 @@
     <!-- This line provides automatic page and style reloading when files change -->
     <script type="module" src="/lib/client/updater.js"></script>
     <link rel="stylesheet" href="styles.css">
-    
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-   
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/main.min.css" rel="stylesheet" />
+
   </head>
 
   <body>
@@ -33,19 +33,19 @@
             <form id="wochenFormular">
                 <h1>Wochenplan</h1>
                 <label for="Datum">Datum:</label>
-                <input type="date" id="wochenDatum"></input>
+                <input type="date" id="wochenDatum" required></input>
                 
                 <label for="wochenUhrzeitbeginn">Beginn:</label>
-                <input class="taskInput" type="time" id="wochenUhrzeitbeginn"></input>
+                <input class="taskInput" type="time" id="wochenUhrzeitbeginn" required></input>
 
                 <label for="wochenUhrzeitende">Ende:</label>
-                <input class="taskInput" type="time" id="wochenUhrzeitende"></input>
+                <input class="taskInput" type="time" id="wochenUhrzeitende" required></input>
                 
                 <label for="wochenInhalt">Inhalt:</label>
-                <input class="taskInput" id="wochenInhalt" placeholder="Inhalt"></input>
+                <input class="taskInput" id="wochenInhalt" placeholder="Inhalt" required></input>
                 
                 <label for="wochenFarbe">Farbe:</label>
-                <select id="wochenFarbe">
+                <select id="wochenFarbe" required>
                     <option value="" selected disabled id="defaultOption">Bitte wählen</option>
                     <option value="Rot">Rot</option>
                     <option value="Gelb">Gelb</option>
@@ -60,16 +60,16 @@
             <form id="terminFormular">
                 <h1>Termin</h1>
                 <label for="Datum">Datum:</label>
-                <input type="date" id="terminDatum"></input>     
+                <input type="date" id="terminDatum" required></input>     
                 
                 <label for="Uhrzeit">Uhrzeit:</label>
-                <input class="taskInput" type="time" id="terminUhrzeit"></input>
+                <input class="taskInput" type="time" id="terminUhrzeit" required></input>
                 
                 <label for="Inhalt">Inhalt:</label>
-                <input class="taskInput" id="terminInhalt" placeholder="Inhalt"></input>
+                <input class="taskInput" id="terminInhalt" placeholder="Inhalt" required></input>
                 
                 <label for="Farbe">Farbe:</label>   
-                <select id="terminFarbe">
+                <select id="terminFarbe" required>
                     <option value="" selected disabled id="defaultOption">Bitte wählen</option>
                     <option value="Rot">Rot</option>
                     <option value="Gelb">Gelb</option>
@@ -84,10 +84,10 @@
             <form id="todoFormular">
                 <h1>To Do</h1>
                 <label for="Datum">Datum:</label>
-                <input type="date" id="todoDatum"></input>
+                <input type="date" id="todoDatum" required></input>
                 
                 <label for="todoFeld">Inhalt:</label>
-                <input class="taskInput" id="todoInhalt" placeholder="Inhalt"></input>
+                <input class="taskInput" id="todoInhalt" placeholder="Inhalt" required></input>
                 
                 <label for="Farbe">Farbe:</label>
                 <select id="todoFarbe">
@@ -109,9 +109,32 @@
                     <h2>Wochenplan</h2>
                 </div>
                 <div id="wochenKalender"></div>
+                    <div id="editorFenster" class="editor hidden">
+                    <div class="editContent">
+                        <h3>Eintrag bearbeiten</h3>
+                        <label for="editName">Name:</label>
+                        <input type="text" id="editName">
+                        <br>
+                        <label for="editInhalt">Inhalt:</label>
+                        <textarea type="text" id="editInhalt"></textarea>
+                        <br>
+                        <label for="editDatum">Datum:</label>
+                        <input type="date" id="editDatum">
+                        <br>
+                        <label for="editStart">Beginn:</label>
+                        <input type="time" id="editStart">
+                        <br>
+                        <label for="editEnde">Ende:</label>
+                        <input type="time" id="editEnde">
+                        <br>
+                        <button id="saveEdit">Speichern</button>
+                        <button id="deleteEntry">Löschen</button>
+                        <button id="closeEditor">Abbrechen</button>
+                    </div>
+                </div>
             </section>
+
             <div class="sideboard">
-                
                 <section id="boardTermine">
                     <div id="terminHeader" class="boardHeaders">
                         <h2>Termine</h2>
@@ -129,6 +152,7 @@
             </div>
         </div>
     </main>
-<script src="index.js" defer></script>
+    
+    <script type="module" src="index.js"></script>
   </body>
 </html>
