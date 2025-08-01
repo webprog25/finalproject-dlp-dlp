@@ -109,8 +109,8 @@ export function termine(Name) {
             ${datumFormatierung}, ${terminEintrag.uhrzeit} Uhr: ${terminEintrag.name} - ${terminEintrag.inhalt}
             </span>
             <div class="listenButtons">
-                <button class="Buttonicons"><img src="check_button.svg"></button>
-                <button class="Buttonicons"><img src="delete_button.svg"></button>
+                <button class="Buttonicons checkButton"><img src="check_button.svg"></button>
+                <button class="Buttonicons deleteButton"><img src="delete_button.svg"></button>
             </div>     
             `;
 
