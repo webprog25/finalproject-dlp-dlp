@@ -5,53 +5,38 @@ export function termine(Name) {
     const terminDatum = document.getElementById('terminDatum');
     const terminUhrzeit = document.getElementById('terminUhrzeit');
     const terminFarbe = document.getElementById('terminFarbe');
-
-    terminFormular.addEventListener('submit', (event) => {
+   
+    // Formular absenden und Termin speichern. Hilfstellung chatGPG: async für fetch hinzugefügt.
+    terminFormular.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const datumObjekt = new Date(terminDatum.value);
-        const datumFormatierung = datumObjekt.toLocaleDateString('de-DE');
-        
-        const listeTerminitems = document.createElement('li');
-        listeTerminitems.className = 'listenEintrag';
-        listeTerminitems.innerHTML = 
-            `<span class="terminItems">      
-            ${datumFormatierung}, ${terminUhrzeit.value} Uhr: ${Name.value} - ${terminInhalt.value}
-            </span>
-            <div class="listenButtons">
-                <button class="checkButton"><img src="check_button.svg"></button>
-                <button class="deleteButton"><img src="delete_button.svg"></button>
-            </div>     
-            `;
+        const terminEintrag = {
+            typ: 'Termin',
+            name: Name.value,
+            datum: terminDatum.value,
+            uhrzeit: terminUhrzeit.value,
+            inhalt: terminInhalt.value,
+            farbe: terminFarbe.value
+        };
 
-        switch(terminFarbe.value) {
-            case 'Rot':
-                    listeTerminitems.style.backgroundColor = '#F4A6A6';
-                break;
+        // Hilfestellung chatGPT: Termineintrag an Server senden (Diesen Block-Code habe ich komplett übernommen)
+        try {
+        const res = await fetch('/api/termin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(terminEintrag)
+        });
 
-            case 'Gelb':
-                    listeTerminitems.style.backgroundColor = '#FFFACD';
-                break;
+        if (!res.ok) throw new Error('Fehler beim Speichern');
 
-            case 'Grün':
-                    listeTerminitems.style.backgroundColor = '#BFD8B8';
-                break;
-
-            case 'Blau':
-                    listeTerminitems.style.backgroundColor = '#AEC6CF';
-                break;
-
-            default: 
-                break;
+        termineAnzeigen(terminEintrag);
+        terminFormular.reset();   // Formular leeren
+        } catch (err) {
+            console.error('Fehler beim Speichern:', err);
         }
-
-        terminListe.appendChild(listeTerminitems);
-        terminDatum.value = '';
-        terminUhrzeit.value = '';
-        terminFarbe.selectedIndex = 0;
     });
 
-    //Editieren Termin
+    //Termin editieren 
     terminListe.addEventListener('click', (event) => {
         const editTerminitem = event.target.closest('.terminItems');
         
@@ -65,7 +50,8 @@ export function termine(Name) {
         // Verhindert wiederholtes Klicken auf denselben Eintrag.
         if (editTerminitem.querySelector('input')) return;
 
-        const terminItemvalue = editTerminitem.textContent;
+        // Hilfestellung chatGPT: trim() hinzugefügt, um Leerzeichen zu entfernen.
+        const terminItemvalue = editTerminitem.textContent.trim();
         const inputFeld = document.createElement('input');
 
         inputFeld.type = 'text';
@@ -88,26 +74,90 @@ export function termine(Name) {
         saveButton.addEventListener('click', speichern);
     });
 
-    //Termin als erledigt markieren (durchstreichen)
+    //Termin durchstreichen (als erledigt markieren)
     terminListe.addEventListener('click', (event) => { 
         const checkButton = event.target.closest('.checkButton');
         if (!checkButton) return;
 
-        const terminEintrag = checkButton.closest('.listenEintrag');
-        const checkText = terminEintrag.querySelector('.terminItems');
+        const listenEintrag = checkButton.closest('.listenEintrag');
+        const checkText = listenEintrag.querySelector('.terminItems');
 
         checkText.classList.toggle('erledigt');
     });
 
-    //Löschen Termin
+    //Termin löschen 
     terminListe.addEventListener('click', (event) => {
         const deleteButton = event.target.closest('.deleteButton');
         if (!deleteButton) return;
 
-        const terminEintrag = deleteButton.closest('.listenEintrag');
-        if (terminEintrag) {
-            terminEintrag.remove();
+        const listenEintrag = deleteButton.closest('.listenEintrag');
+        if (listenEintrag) {
+            listenEintrag.remove();
         }
     });
 
-}
+    //Methoden:
+    // Funktion zum Anzeigen der erzeugten Termine in der Liste
+    function termineAnzeigen(terminEintrag) { 
+        const datumObjekt = new Date(terminEintrag.datum);
+        const datumFormatierung = datumObjekt.toLocaleDateString('de-DE');
+        
+        const listeTerminitems = document.createElement('li');
+        listeTerminitems.className = 'listenEintrag';
+        listeTerminitems.innerHTML = 
+            `<span class="terminItems">      
+            ${datumFormatierung}, ${terminEintrag.uhrzeit} Uhr: ${terminEintrag.name} - ${terminEintrag.inhalt}
+            </span>
+            <div class="listenButtons">
+                <button class="Buttonicons"><img src="check_button.svg"></button>
+                <button class="Buttonicons"><img src="delete_button.svg"></button>
+            </div>     
+            `;
+
+        switch(terminEintrag.farbe) {
+            case 'Rot':
+                    listeTerminitems.style.backgroundColor = '#F4A6A6';
+                break;
+
+            case 'Gelb':
+                    listeTerminitems.style.backgroundColor = '#FFFACD';
+                break;
+
+            case 'Grün':
+                    listeTerminitems.style.backgroundColor = '#BFD8B8';
+                break;
+
+            case 'Blau':
+                    listeTerminitems.style.backgroundColor = '#AEC6CF';
+                break;
+
+            default: 
+                break;
+        }
+
+        terminListe.appendChild(listeTerminitems);
+        /* Formular leeren
+        terminDatum.value = '';
+        terminUhrzeit.value = '';
+        terminFarbe.selectedIndex = 0; */
+    };
+
+    // Hilfestellung chatGPT: Beim Laden alle vorhandenen Termine holen (Diesen Block-Code habe ich komplett übernommen)
+    async function termineLaden() {
+            try {
+                const res = await fetch('/api/eintraege');
+                if (!res.ok) throw new Error('Fehler beim Laden');
+
+                const daten = await res.json();
+                const termine = daten.termine.filter(e => e.typ === 'Termin');
+                terminListe.innerHTML = ''; // Liste leeren
+
+                termine.forEach(termineAnzeigen);
+            } catch (err) {
+                console.error('Fehler beim Laden der Termine:', err);
+            }
+        }
+        
+    //alle Termine laden stets bei Seitenaufruf bzw. -aktualisierung
+    termineLaden();
+};

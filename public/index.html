@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <title>Final Project</title>
 
-    <!-- This line provides automatic page and style reloading when files change -->
     <script type="module" src="/lib/client/updater.js"></script>
     <link rel="stylesheet" href="styles.css">
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/main.min.css" rel="stylesheet" />
-
   </head>
 
   <body>
@@ -18,14 +17,14 @@
             <form id="menüFormular">
               <h1>Menü</h1>
               <label for="Kategorie">Wähle eine Kategorie:</label>
-              <select id="Kategorie">
+              <select class="Auswahl" id="Kategorie">
                   <option value="" selected disabled id="defaultOption">Bitte wählen</option>
                   <option value="Wochenplan">Wochenplan</option>
                   <option value="Termin">Termin</option>
                   <option value="Todo">To Do</option>
               </select>
-              <input id="Name" placeholder="Dein Name" required></input>
-              <button type="submit" id="buttonMenü">erstellen</button>
+              <input class="Userinput" id="Name" placeholder="Dein Name" required></input>
+              <button class="Buttoninput" type="submit" id="buttonMenü">erstellen</button>
             </form>
         </section >
        
@@ -33,26 +32,26 @@
             <form id="wochenFormular">
                 <h1>Wochenplan</h1>
                 <label for="Datum">Datum:</label>
-                <input type="date" id="wochenDatum" required></input>
+                <input class="Datuminput" type="date" id="wochenDatum" required></input>
                 
                 <label for="wochenUhrzeitbeginn">Beginn:</label>
-                <input class="taskInput" type="time" id="wochenUhrzeitbeginn" required></input>
+                <input class="Uhrzeitinput" type="time" id="wochenUhrzeitbeginn" required></input>
 
                 <label for="wochenUhrzeitende">Ende:</label>
-                <input class="taskInput" type="time" id="wochenUhrzeitende" required></input>
+                <input class="Uhrzeitinput" type="time" id="wochenUhrzeitende" required></input>
                 
                 <label for="wochenInhalt">Inhalt:</label>
-                <input class="taskInput" id="wochenInhalt" placeholder="Inhalt" required></input>
+                <input class="Userinput" id="wochenInhalt" placeholder="Inhalt" required></input>
                 
                 <label for="wochenFarbe">Farbe:</label>
-                <select id="wochenFarbe" required>
+                <select class="Auswahl" id="wochenFarbe" required>
                     <option value="" selected disabled id="defaultOption">Bitte wählen</option>
                     <option value="Rot">Rot</option>
                     <option value="Gelb">Gelb</option>
                     <option value="Grün">Grün</option>
                     <option value="Blau">Blau</option>
                 </select>
-                <button type="submit">Speichern</button>
+                <button class="Buttoninput" type="submit">speichern</button>
             </form>
         </section>
 
@@ -60,23 +59,23 @@
             <form id="terminFormular">
                 <h1>Termin</h1>
                 <label for="Datum">Datum:</label>
-                <input type="date" id="terminDatum" required></input>     
+                <input class="Datuminput" type="date" id="terminDatum" required></input>     
                 
                 <label for="Uhrzeit">Uhrzeit:</label>
-                <input class="taskInput" type="time" id="terminUhrzeit" required></input>
+                <input class="Uhrzeitinput" type="time" id="terminUhrzeit" required></input>
                 
                 <label for="Inhalt">Inhalt:</label>
-                <input class="taskInput" id="terminInhalt" placeholder="Inhalt" required></input>
+                <input class="Userinput" id="terminInhalt" placeholder="Inhalt" required></input>
                 
                 <label for="Farbe">Farbe:</label>   
-                <select id="terminFarbe" required>
+                <select class="Auswahl" id="terminFarbe" required>
                     <option value="" selected disabled id="defaultOption">Bitte wählen</option>
                     <option value="Rot">Rot</option>
                     <option value="Gelb">Gelb</option>
                     <option value="Grün">Grün</option>
                     <option value="Blau">Blau</option>
                 </select>
-                <button type="submit">Speichern</button>
+                <button class="Buttoninput" type="submit">speichern</button>
             </form>
         </section>
 
@@ -84,33 +83,33 @@
             <form id="todoFormular">
                 <h1>To Do</h1>
                 <label for="Datum">Datum:</label>
-                <input type="date" id="todoDatum" required></input>
+                <input class="Datuminput" type="date" id="todoDatum" required></input>
                 
                 <label for="todoFeld">Inhalt:</label>
-                <input class="taskInput" id="todoInhalt" placeholder="Inhalt" required></input>
+                <input class="Userinput" id="todoInhalt" placeholder="Inhalt" required></input>
                 
                 <label for="Farbe">Farbe:</label>
-                <select id="todoFarbe">
+                <select class="Auswahl" id="todoFarbe">
                     <option value="" selected disabled id="defaultOption">Bitte wählen</option>
                     <option value="Rot">Rot</option>
                     <option value="Gelb">Gelb</option>
                     <option value="Grün">Grün</option>
                     <option value="Blau">Blau</option>
                 </select>
-                <button type="submit">Speichern</button>
+                <button class="Buttoninput" type="submit">speichern</button>
             </form>
         </section>
     </header>
 
     <main>
-        <div class="mainboard">
-            <section id="boardWochenplan">
-                <div id="wochenplanHeader" class="boardHeaders">
+        <section class="mainboard">
+            <section class="subboard" id="weekboard">
+                <div class="boardHeaders" id="wochenplanHeader" >
                     <h2>Wochenplan</h2>
                 </div>
                 <div id="wochenKalender"></div>
                     <div id="editorFenster" class="editor hidden">
-                    <div class="editContent">
+                        <div class="editContent">
                         <h3>Eintrag bearbeiten</h3>
                         <label for="editName">Name:</label>
                         <input type="text" id="editName">
@@ -127,16 +126,16 @@
                         <label for="editEnde">Ende:</label>
                         <input type="time" id="editEnde">
                         <br>
-                        <button id="saveEdit">Speichern</button>
-                        <button id="deleteEntry">Löschen</button>
-                        <button id="closeEditor">Abbrechen</button>
+                        <button class="Buttoninput" id="saveEdit">speichern</button>
+                        <button class="Buttoninput" id="deleteEntry">löschen</button>
+                        <button class="Buttoninput" id="closeEditor">abbrechen</button>
                     </div>
                 </div>
             </section>
 
-            <div class="sideboard">
+            <section class="subboard" id="sideboard">
                 <section id="boardTermine">
-                    <div id="terminHeader" class="boardHeaders">
+                    <div class="boardHeaders" id="terminHeader" >
                         <h2>Termine</h2>
                     </div>
                     <ul id="terminListe"></ul>
@@ -148,9 +147,8 @@
                     </div>   
                         <ul id="todoListe"></ul>
                 </section>
-
-            </div>
-        </div>
+            </section>
+        </section>
     </main>
     
     <script type="module" src="index.js"></script>

@@ -1,0 +1,50 @@
+[
+  {
+    "typ": "Termin",
+    "name": "Duy Le",
+    "datum": "2025-07-26",
+    "uhrzeit": "05:31",
+    "inhalt": "Arzt",
+    "farbe": "Rot"
+  },
+  {
+    "typ": "Termin",
+    "name": "Carol",
+    "datum": "2025-07-30",
+    "uhrzeit": "11:09",
+    "inhalt": "Flug stornieren",
+    "farbe": "Grün"
+  },
+  {
+    "typ": "Todo",
+    "name": "Duy Le",
+    "datum": "2025-07-28",
+    "inhalt": "Einkaufen",
+    "farbe": "Rot"
+  },
+  {
+    "typ": "Todo",
+    "name": "Carol",
+    "datum": "2025-07-29",
+    "inhalt": "Bogota",
+    "farbe": "Blau"
+  },
+  {
+    "typ": "Wochenplan",
+    "name": "Duy Le",
+    "datum": "2025-07-28",
+    "beginn": "15:41",
+    "ende": "17:41",
+    "inhalt": "Arbeit",
+    "farbe": "Grün"
+  },
+  {
+    "typ": "Wochenplan",
+    "name": "Duy Le",
+    "datum": "2025-07-28",
+    "beginn": "10:00",
+    "ende": "12:00",
+    "inhalt": "Uni",
+    "farbe": "Rot"
+  }
+]
